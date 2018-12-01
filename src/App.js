@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from 'react-redux';
+import {
+  Grid,
+} from '@material-ui/core';
+
+import store from './store';
+
+import DeviceList from './containers/DeviceList';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Provider store={store}>
+          <Grid container direction='column'>
+            <Grid item xs={4}>
+              <DeviceList />
+            </Grid>
+          </Grid>
+        </Provider>
       </div>
     );
   }
