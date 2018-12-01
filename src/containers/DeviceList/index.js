@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import DeviceList from '../../components/DeviceList';
 import {
     fetchAllDevices,
+    selectDeviceAndFetchBoxes,
 } from '../../actions';
 
 /**
@@ -13,10 +14,11 @@ import {
  * @return {Object} Returns an object containing updated props from the redux store.
  */
 function mapStateToProps(state, ownProps) {
-    const { devices, isFetching } = state.devices;
+    const { devices, devicesFetching, id } = state.devices;
     return {
-        isFetching,
-        devices: Object.keys(devices).map(key => devices[key])
+        devicesFetching,
+        devices,
+        selectedId: id
     };
 }
 
@@ -29,7 +31,8 @@ function mapStateToProps(state, ownProps) {
  */
 function mapDispatchToProps(dispatch, ownProps) {
     return {
-        fetchAllDevices: () => dispatch(fetchAllDevices(dispatch))
+        fetchAllDevices: () => dispatch(fetchAllDevices(dispatch)),
+        selectDevice: (id) => dispatch(selectDeviceAndFetchBoxes(id)),
     };
 }
 

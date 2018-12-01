@@ -22,13 +22,17 @@ const styles = (theme) => ({
     spacer: {
         flex: '1 1 100%'
     },
+    selected: {
+        background: theme.palette.secondary.light
+    }
 });
 
 class DeviceList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.onRefreshHandler = this.onRefreshHandler.bind(this);
+        this.handleRefresh = this.handleRefresh.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
@@ -36,13 +40,18 @@ class DeviceList extends React.Component {
         fetchAllDevices();
     }
 
-    onRefreshHandler() {
+    handleRefresh() {
         const { fetchAllDevices } = this.props;
         fetchAllDevices();
     }
 
+    handleClick(id) {
+        const { selectDevice } = this.props;
+        selectDevice(id);
+    }
+
     render() {
-        const { devices, isFetching, classes } = this.props;
+        const { devices, devicesFetching, classes, selectedId } = this.props;
         
         return (
             <React.Fragment>
@@ -54,7 +63,7 @@ class DeviceList extends React.Component {
                     </div>
                     <div className={classes.spacer}></div>
                     <div>
-                        <IconButton onClick={this.onRefreshHandler}>
+                        <IconButton onClick={this.handleRefresh}>
                             <RefreshIcon />
                         </IconButton>
                     </div>
@@ -67,17 +76,21 @@ class DeviceList extends React.Component {
                     </TableHead>
                     <TableBody>
                         {
-                            isFetching
+                            devicesFetching
                             ? <TableRow>
                                 <TableCell>
                                     <LinearProgress variant='indeterminate' />
-                                </TableCell>
+                                </TableCell>IDBDatabase
                             </TableRow>
                             : devices.map((device) => {
                                 const { id, name } = device;
                                 
                                 return (
-                                    <TableRow key={id}>
+                                    <TableRow
+                                        key={id}
+                                        onClick={() => this.handleClick(id)}
+                                        className={selectedId === id ? classes.selected : null}
+                                    >
                                         <TableCell>
                                             {name}
                                         </TableCell>
@@ -96,6 +109,8 @@ DeviceList.propTypes = {
     classes: PropTypes.object.isRequired,
     devices: PropTypes.array.isRequired,
     fetchAllDevices: PropTypes.func.isRequired,
+    selectDevice: PropTypes.func.isRequired,
+    selectedId: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(DeviceList);

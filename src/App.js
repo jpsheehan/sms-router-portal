@@ -7,15 +7,23 @@ import {
 import store from './store';
 
 import DeviceList from './containers/DeviceList';
+import Inbox from './containers/Inbox';
+import Outbox from './containers/Outbox';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Provider store={store}>
-          <Grid container direction='column'>
+          <Grid container direction='row'>
             <Grid item xs={4}>
               <DeviceList />
+            </Grid>
+            <Grid item xs={4}>
+              <Inbox />
+            </Grid>
+            <Grid item xs={4}>
+              <Outbox />
             </Grid>
           </Grid>
         </Provider>
