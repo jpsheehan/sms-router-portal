@@ -45,4 +45,8 @@ class PeriodicFetcher extends React.Component {
 
 }
 
+PeriodicFetcher.propTypes = {
+    timeout: PropTypes.number.isRequired,
+};
+
 export default PeriodicFetcher;

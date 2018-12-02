@@ -9,10 +9,11 @@ import {
 
 import {
     Refresh as RefreshIcon,
-    Send as SendIcon
+    Add as AddIcon
 } from '@material-ui/icons';
 
 import MessageList from '../MessageList';
+import NewMessageDialog from '../NewMessageDialog';
 
 const styles = (theme) => ({
     spacer: {
@@ -24,8 +25,14 @@ class Outbox extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            newMessageDialogOpened: false,
+        };
+
         this.handleRefresh = this.handleRefresh.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
+        this.handleNewMessageDialogClose = this.handleNewMessageDialogClose.bind(this);
+        this.handleNewMessageDialogSubmit = this.handleNewMessageDialogSubmit.bind(this);
     }
 
     handleRefresh() {
@@ -34,8 +41,21 @@ class Outbox extends React.Component {
     }
 
     handleAdd() {
+        this.setState({
+            newMessageDialogOpened: true
+        })
+    }
+
+    handleNewMessageDialogClose() {
+        this.setState({
+            newMessageDialogOpened: false
+        })
+    }
+
+    handleNewMessageDialogSubmit({number, text}) {
         const { doCreateMessage } = this.props;
-        doCreateMessage('0273374547', 'test')
+        doCreateMessage(number, text);
+        this.handleNewMessageDialogClose();
     }
 
     render() {
@@ -56,7 +76,7 @@ class Outbox extends React.Component {
                             disabled={selectedId ? false : true}
                             onClick={this.handleAdd}
                         >
-                            <SendIcon />
+                            <AddIcon />
                         </IconButton>
                     </div>
                     <div>
@@ -71,6 +91,11 @@ class Outbox extends React.Component {
                 <MessageList
                     messages={outbox}
                     direction="To"
+                />
+                <NewMessageDialog
+                    open={this.state.newMessageDialogOpened}
+                    onClose={this.handleNewMessageDialogClose}
+                    onSubmit={this.handleNewMessageDialogSubmit}
                 />
             </React.Fragment>
         );
