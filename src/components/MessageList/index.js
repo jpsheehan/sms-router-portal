@@ -24,6 +24,9 @@ function MessageList(props) {
             <TableHead>
                 <TableRow>
                     <TableCell>
+                        Time
+                    </TableCell>
+                    <TableCell>
                         {direction}
                     </TableCell>
                     <TableCell>
@@ -41,10 +44,15 @@ function MessageList(props) {
                 {
                     messages.map(message => {
 
-                        const { id, number, text } = message;
+                        const { id, number, text, time } = message;
+
+                        const timeString = new Date(time).toLocaleTimeString();
 
                         return (
                             <TableRow key={id}>
+                                <TableCell>
+                                    {timeString}
+                                </TableCell>
                                 <TableCell>
                                     {number}
                                 </TableCell>
