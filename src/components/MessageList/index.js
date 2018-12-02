@@ -7,7 +7,7 @@ import {
     TableCell,
     TableHead,
     TableRow,
-    Typography,
+    Tooltip,
     IconButton,
 } from '@material-ui/core';
 
@@ -29,9 +29,6 @@ function MessageList(props) {
                     <TableCell>
                         {direction}
                     </TableCell>
-                    <TableCell>
-                        Message
-                    </TableCell>
                     {
                         canDelete
                         ? (
@@ -49,29 +46,26 @@ function MessageList(props) {
                         const timeString = new Date(time).toLocaleTimeString();
 
                         return (
-                            <TableRow key={id}>
-                                <TableCell>
-                                    {timeString}
-                                </TableCell>
-                                <TableCell>
-                                    {number}
-                                </TableCell>
-                                <TableCell>
-                                    <Typography noWrap>
-                                        {text}
-                                    </Typography>
-                                </TableCell>
-                                {
-                                    canDelete
-                                    ? (
-                                        <TableCell>
-                                            <IconButton onClick={() => onDelete(id)}>
-                                                <DeleteIcon />
-                                            </IconButton>
-                                        </TableCell>
-                                    ) : null
-                                }
-                            </TableRow>
+                            <Tooltip title={text}>
+                                <TableRow key={id}>
+                                    <TableCell>
+                                        {timeString}
+                                    </TableCell>
+                                    <TableCell>
+                                        {number}
+                                    </TableCell>
+                                    {
+                                        canDelete
+                                        ? (
+                                            <TableCell>
+                                                <IconButton onClick={() => onDelete(id)}>
+                                                    <DeleteIcon />
+                                                </IconButton>
+                                            </TableCell>
+                                        ) : null
+                                    }
+                                </TableRow>
+                            </Tooltip>
                         );
 
                     })

@@ -6,6 +6,7 @@ import {
     DialogTitle,
     DialogActions,
     DialogContent,
+    DialogContentText,
     TextField,
     Button,
 } from '@material-ui/core';
@@ -62,12 +63,16 @@ class NewMessageDialog extends Component {
                     Send Message
                 </DialogTitle>
                 <DialogContent>
+                    <DialogContentText>
+                        Send an SMS message to a phone:
+                    </DialogContentText>
                     <TextField
                         label="Phone Number"
                         placeholder="027 123 4567"
                         value={this.state.number}
                         onChange={this.handleNumberChange}
                         fullWidth
+                        autoFocus
                     />
                     <TextField
                         label="Message"
