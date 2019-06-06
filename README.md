@@ -2,7 +2,7 @@
 
 *Written by JP Sheehan. Licensed under the GPLv3.*
 
-A web frontend for the [SMS Router Proxy](https://github.com/jpsheehan/sms-router-proxy) and the [SMS Router](https://github.com/jpsheehan/sms-router).
+A web frontend for the [SMS Proxy Android](https://github.com/jpsheehan/sms-proxy-android) and the [SMS Router](https://github.com/jpsheehan/sms-router).
 
 ## Downloading and installing dependencies
 
