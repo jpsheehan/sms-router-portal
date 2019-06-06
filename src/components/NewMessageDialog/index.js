@@ -96,7 +96,7 @@ class NewMessageDialog extends Component {
     }
 }
 
-NewMessageDialog.proptypes = {
+NewMessageDialog.propTypes = {
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
