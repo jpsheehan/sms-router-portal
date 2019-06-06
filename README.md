@@ -4,6 +4,8 @@
 
 A web frontend for the [SMS Proxy Android](https://github.com/jpsheehan/sms-proxy-android) and the [SMS Router](https://github.com/jpsheehan/sms-router).
 
+This is one project of three and is a proof of concept to allow programs to send and receive SMS messages via HTTP on a computer. This project is the web frontend that gives a nice(ish) user interface to the main functions of the SMS Router.
+
 ## Downloading and installing dependencies
 
 Before running or building, you must install the project dependencies with the following command:
